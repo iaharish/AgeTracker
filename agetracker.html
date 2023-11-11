@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Real-Time Age Counter</title>
+	 <link rel="stylesheet" type="text/css" href="styles.css">
+	<style>
+        /* CSS styles go here */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        #age {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin: 20px;
+        }
+
+        #age-container {
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <h1 id="age"></h1>
+    <script>
+        function updateAge() {
+            const birthdate = new Date('2002-09-30'); // Your birthdate
+            const currentDate = new Date();
+            const ageInMilliseconds = currentDate - birthdate;
+
+            const seconds = Math.floor(ageInMilliseconds / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+            const months = Math.floor(days / 30.44); // Average month length
+            const years = Math.floor(months / 12);
+
+            // Calculate remaining time
+            const remainingMonths = months % 12;
+            const remainingDays = days % 30;
+            const remainingHours = hours % 24;
+            const remainingMinutes = minutes % 60;
+            const remainingSeconds = seconds % 60;
+
+            const formattedAge = `${years} years, ${remainingMonths} months, ${remainingDays} days, ${remainingHours} hours, ${remainingMinutes} minutes, ${remainingSeconds} seconds`;
+
+            document.getElementById('age').textContent = `Your age: ${formattedAge}`;
+        }
+
+        updateAge(); // Initial call
+        setInterval(updateAge, 1000); // Update every second
+    </script>
+</body>
+</html>
